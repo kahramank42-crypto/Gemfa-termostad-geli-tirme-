@@ -1,1 +1,37 @@
+name: Firmware Derleme
 
+on:
+  push:
+    branches: [ "main" ]   # Ana dala her yükleme olduğunda çalışır
+  workflow_dispatch:        # Manuel olarak "Run workflow" tuşuyla da başlatılabilir
+
+jobs:
+  build:
+    runs-on: ubuntu-latest   # GitHub'ın Linux tabanlı sanal makinesi
+
+    steps:
+    - name: Kodu indir
+      uses: actions/checkout@v3
+
+    - name: Arduino CLI kur
+      uses: arduino/setup-arduino-cli@v1
+      with:
+        version: latest
+
+    - name: ESP32 platformu ve kütüphaneleri yükle
+      run: |
+        arduino-cli core update-index
+        arduino-cli core install esp32:esp32
+        arduino-cli lib install "DallasTemperature"
+        arduino-cli lib install "OneWire"
+
+    - name: Kod derle
+      run: |
+        mkdir -p build
+        arduino-cli compile --fqbn esp32:esp32:esp32 . --build-path ./build
+
+    - name: Çıktı dosyasını kaydet
+      uses: actions/upload-artifact@v3
+      with:
+        name: firmware
+        path: build/*.bin
