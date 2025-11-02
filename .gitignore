@@ -1,41 +1,23 @@
-# Prerequisites
+# Arduino geçici derleme dosyaları
+*.hex
+*.bin
+*.elf
+*.eep
+*.map
 *.d
-
-# Compiled Object files
-*.slo
-*.lo
 *.o
-*.obj
 
-# Precompiled Headers
-*.gch
-*.pch
+# Arduino IDE / CLI derleme klasörleri
+build/
+sketches/
+*.cpp.d
+*.cpp.o
 
-# Linker files
-*.ilk
+# İşletim sistemi gereksiz dosyaları
+.DS_Store
+Thumbs.db
 
-# Debugger Files
-*.pdb
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
-
-# debug information files
-*.dwo
+# Yedek / geçici dosyalar
+*~
+*.bak
+*.swp
